@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Flex, Heading, Image, Button } from '@chakra-ui/react'
+import { CreateButton, NotiomLogo, NotiomLogoText } from "@/components/allComponents";
 
 export default function Home() {
   return (
@@ -10,24 +11,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex mt = {29} ml = {49}>
-        <Image
-          boxSize='48px'
-          objectFit='cover'
-          src='Vector.png'
-        />
-        <Heading 
-          fontFamily={`"DM Sans", sans-serif`} 
-          color="#545454" 
-          fontSize={40} 
-          ml = {5}
-          w = {142}
-          >
-          Notiom
-        </Heading>
-        <Button bg={'#2F80ED'} color = 'white' ml = {1334}>
-          Create
-        </Button>
+      <Flex mt = {29} ml = {49} id = "navBar">
+        <NotiomLogo/>
+        <NotiomLogoText/>
+        <CreateButton/>
       </Flex>
     </>
   );
