@@ -25,6 +25,9 @@ export default function Home() {
           >
           Notiom
         </Heading>
+        <Button bg={'#2F80ED'} color = 'white' ml = {1334}>
+          Create
+        </Button>
       </Flex>
     </>
   );
