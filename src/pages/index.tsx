@@ -1,6 +1,7 @@
 import Head from "next/head";
-import { Flex, Heading, Image, Button } from '@chakra-ui/react'
-import { CreateButton, NotiomLogo, NotiomLogoText } from "@/components/allComponents";
+import { Flex, Heading, Spacer, Text } from '@chakra-ui/react'
+import { NotiomLogo } from "@/components/NotiomLogo";
+import { CreateButton } from "@/components/CreateButton";
 
 export default function Home() {
   return (
@@ -11,11 +12,30 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex mt = {29} ml = {49} id = "navBar">
+      <Flex mt = {29} ml={49} id = "navBar">
         <NotiomLogo/>
-        <NotiomLogoText/>
+        <Heading fontFamily={`"DM Sans", sans-serif`} color="#545454" fontSize={40} ml = {5} w = {142}>
+          Notiom
+        </Heading>
+        <Spacer/>
         <CreateButton/>
       </Flex>
+      <Flex
+      direction="column"
+      align="center"
+      justify="center"
+      textAlign="center"
+      p={{ base: 4, md: 8 }}
+      mt={"35px"}
+    >
+      <Heading mb={30} fontSize={"60px"}>
+        Create. Explore.
+      </Heading>
+      <Text fontSize={"40px"} color="#545454">
+        The document editing software you've been waiting for
+      </Text>
+    </Flex>
+
     </>
   );
 }
