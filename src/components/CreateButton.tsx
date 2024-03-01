@@ -1,10 +1,15 @@
 import React from 'react';
-import { Button, Box } from '@chakra-ui/react';
+import { Box, Button, useDisclosure } from '@chakra-ui/react';
+import { DescriptionModal } from '/Users/warrenchang/Bootcamp/notiom/src/components/DescriptionModal';
+
 
 export const CreateButton = () => {
-    return (
-      <Box mr={{ base: "49px", md: "49px" }}>
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <Box mr={{ base: "49px", md: "49px" }}>
       <Button
+        onClick={onOpen} 
         bg="#2F80ED"
         color="white"
         _hover={{ bg: 'blue.600' }}
@@ -17,6 +22,8 @@ export const CreateButton = () => {
       >
         Create
       </Button>
+
+      <DescriptionModal isOpen={isOpen} onClose={onClose} />
     </Box>
-    );
-  };
+  );
+};
