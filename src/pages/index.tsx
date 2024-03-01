@@ -2,6 +2,8 @@ import Head from "next/head";
 import { Flex, Heading, Spacer, Text } from '@chakra-ui/react'
 import { NotiomLogo } from "@/components/NotiomLogo";
 import { CreateButton } from "@/components/CreateButton";
+import { MainCreateButton } from "@/components/MainCreateButton";
+import { Main } from "next/document";
 
 export default function Home() {
   return (
@@ -34,6 +36,9 @@ export default function Home() {
       <Text fontSize={"40px"} color="#545454">
         The document editing software you've been waiting for
       </Text>
+    </Flex>
+    <Flex ml={49} mt={50}>
+      <MainCreateButton></MainCreateButton>
     </Flex>
 
     </>

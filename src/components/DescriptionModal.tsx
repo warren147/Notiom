@@ -17,16 +17,16 @@ export const DescriptionModal = ({ isOpen, onClose }) => {
             <Box as="label" htmlFor="description" mb="8px">Description:</Box>
             <Input
               id="description"
-              placeholder="Enter description here"
+              placeholder="Enter description here:"
               size="md"
             />
           </Box>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Close
+            Save
           </Button>
-          <Button variant="ghost">Save</Button>
+          <Button onClick={onClose} mr={3}>Close</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
