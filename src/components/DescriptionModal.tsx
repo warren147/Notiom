@@ -1,19 +1,15 @@
-// DescriptionModal.js
-import React from "react";
-import {
-  Box,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Input,
-} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Input, Box } from '@chakra-ui/react';
 
-export const DescriptionModal = ({ isOpen, onClose }) => {
+export const DescriptionModal = ({ isOpen, onClose, onSave }) => {
+  const [description, setDescription] = useState('');
+  
+  const handleSave = () => {
+    onSave(description);
+    setDescription(''); 
+    onClose(); 
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -26,14 +22,14 @@ export const DescriptionModal = ({ isOpen, onClose }) => {
               Description:
             </Box>
             <Input
-              id="description"
               placeholder="Enter description here:"
-              size="md"
+              value={description}
+              onChange={(v) => setDescription(v.target.value)}
             />
           </Box>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button colorScheme="blue" mr={3} onClick={handleSave}>
             Save
           </Button>
           <Button onClick={onClose} mr={3}>

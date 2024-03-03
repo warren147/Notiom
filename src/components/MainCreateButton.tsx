@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, useDisclosure, Image } from "@chakra-ui/react";
 import { DescriptionModal } from "/Users/warrenchang/Bootcamp/notiom/src/components/DescriptionModal";
+import { DescriptionDisplay } from "/Users/warrenchang/Bootcamp/notiom/src/components/Document";
 
 export const MainCreateButton = () => {
+  const [savedDescription, setSavedDescription] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -21,7 +23,8 @@ export const MainCreateButton = () => {
         <Image src="create.png" width="230%" height="230%" objectFit="cover" />
       </Button>
 
-      <DescriptionModal isOpen={isOpen} onClose={onClose} />
+      <DescriptionModal isOpen={isOpen} onClose={onClose} onSave={setSavedDescription}/>
+      <DescriptionDisplay description={savedDescription}/>
     </Box>
   );
 };

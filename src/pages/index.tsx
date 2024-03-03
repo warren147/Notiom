@@ -42,9 +42,9 @@ export default function Home() {
         <Text fontSize={"40px"} color="#545454">
           The document editing software you've been waiting for
         </Text>
-      </Flex>
+      </Flex> 
       <Flex ml={49} mt={50}>
-        <MainCreateButton></MainCreateButton>
+        <MainCreateButton/>
       </Flex>
     </>
   );

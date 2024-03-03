@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import { DescriptionModal } from "/Users/warrenchang/Bootcamp/notiom/src/components/DescriptionModal";
 
 export const CreateButton = () => {
+  const [savedDescription, setSavedDescription] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -22,7 +23,7 @@ export const CreateButton = () => {
         Create
       </Button>
 
-      <DescriptionModal isOpen={isOpen} onClose={onClose} />
+      <DescriptionModal isOpen={isOpen} onClose={onClose} onSave={setSavedDescription}/>
     </Box>
   );
 };
