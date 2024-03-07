@@ -4,7 +4,7 @@ import { DescriptionModal } from "/Users/warrenchang/Bootcamp/notiom/src/compone
 import { DescriptionDisplay } from "/Users/warrenchang/Bootcamp/notiom/src/components/Document";
 
 export const MainCreateButton = () => {
-  const [savedDescription, setSavedDescription] = useState('');
+  const [description, setSavedDescription] = useState('');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -24,7 +24,7 @@ export const MainCreateButton = () => {
       </Button>
 
       <DescriptionModal isOpen={isOpen} onClose={onClose} onSave={setSavedDescription}/>
-      <DescriptionDisplay description={savedDescription}/>
+      {/* <DescriptionDisplay description={description}/> */}
     </Box>
   );
 };

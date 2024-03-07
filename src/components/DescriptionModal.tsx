@@ -3,7 +3,7 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, Modal
 
 export const DescriptionModal = ({ isOpen, onClose, onSave }) => {
   const [description, setDescription] = useState('');
-  
+
   const handleSave = () => {
     onSave(description);
     setDescription(''); 
@@ -24,7 +24,7 @@ export const DescriptionModal = ({ isOpen, onClose, onSave }) => {
             <Input
               placeholder="Enter description here:"
               value={description}
-              onChange={(v) => setDescription(v.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </Box>
         </ModalBody>
@@ -40,3 +40,4 @@ export const DescriptionModal = ({ isOpen, onClose, onSave }) => {
     </Modal>
   );
 };
+
