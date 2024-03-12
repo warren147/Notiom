@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
-import { DescriptionModal } from "/Users/warrenchang/Bootcamp/notiom/src/components/DescriptionModal";
+import { DescriptionModal } from "../components/DescriptionModal";
 
 export const CreateButton = () => {
   const [savedDescription, setSavedDescription] = useState('');
