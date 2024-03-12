@@ -58,6 +58,8 @@ export const MainCreateButton = () => {
         fontFamily="'DM Sans', sans-serif"
         fontSize="24px"
         margin="20px"
+        whiteSpace="normal"
+        textOverflow="ellipsis"
       >
         {doc.content}
       </Button>
