@@ -36,32 +36,44 @@ export const MainCreateButton = () => {
     onClose();
   };
 
+  const handleDelete = () => {
+    if (currentDocument) {
+      setDocuments(docs => docs.filter(doc => doc.id !== currentDocument.id));
+    }
+    onClose();
+  };
+
   const handleDocumentClick = (doc: Document) => {
     setCurrentDocument(doc);
     onOpen();
   };
 
   const renderDocumentButtons = () => {
-    return documents.map(doc => (
-      <Button
-        key={doc.id}
-        onClick={() => handleDocumentClick(doc)}
-        bg="gray.100"
-        color="black"
-        borderColor="black"
-        borderWidth="1px"
-        marginLeft="2"
-        _hover={{ bg: "gray.300" }}
-        borderRadius="10px"
-        width="150px"
-        height="150px"
-        fontFamily="'DM Sans', sans-serif"
-        fontSize="24px"
-        margin="20px"
-      >
-        {doc.content}
-      </Button>
-    ));
+    return documents.map(doc => {
+      const previewText = doc.content.split(' ').slice(0, 5).join(' ') + (doc.content.split(' ').length > 5 ? '...' : '');
+      return (
+        <Button
+          key={doc.id}
+          onClick={() => handleDocumentClick(doc)}
+          bg="gray.100"
+          color="black"
+          borderColor="black"
+          borderWidth="1px"
+          marginLeft="2"
+          _hover={{ bg: "gray.300" }}
+          borderRadius="10px"
+          width="150px"
+          height="150px"
+          fontFamily="'DM Sans', sans-serif"
+          fontSize="24px"
+          margin="20px"
+          whiteSpace="normal"
+          textOverflow="ellipsis"
+        >
+          {previewText}
+        </Button>
+      );
+    });
   };
 
   return (
@@ -85,6 +97,7 @@ export const MainCreateButton = () => {
         isOpen={isOpen}
         onClose={onClose}
         onSave={handleSave}
+        onDelete={handleDelete}
         initialDescription={currentDocument?.content || ''}
       />
     </Flex>

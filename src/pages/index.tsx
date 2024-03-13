@@ -3,7 +3,6 @@ import { Flex, Heading, Spacer, Text } from "@chakra-ui/react";
 import { NotiomLogo } from "../components/NotiomLogo";
 import { CreateButton } from "@/components/CreateButton";
 import { MainCreateButton } from "@/components/MainCreateButton";
-import { Main } from "next/document";
 
 export default function Home() {
   return (
