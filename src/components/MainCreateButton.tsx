@@ -36,6 +36,13 @@ export const MainCreateButton = () => {
     onClose();
   };
 
+  const handleDelete = () => {
+    if (currentDocument) {
+      setDocuments(docs => docs.filter(doc => doc.id !== currentDocument.id));
+    }
+    onClose();
+  };
+
   const handleDocumentClick = (doc: Document) => {
     setCurrentDocument(doc);
     onOpen();
@@ -90,6 +97,7 @@ export const MainCreateButton = () => {
         isOpen={isOpen}
         onClose={onClose}
         onSave={handleSave}
+        onDelete={handleDelete}
         initialDescription={currentDocument?.content || ''}
       />
     </Flex>
