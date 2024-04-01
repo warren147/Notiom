@@ -4,6 +4,32 @@ import { NotiomLogo } from "../components/NotiomLogo";
 import { CreateButton } from "@/components/CreateButton";
 import { MainCreateButton } from "@/components/MainCreateButton";
 
+// import { MongoClient } from "mongodb";
+
+// const uri = "process.env.MONGODB_URI";
+
+// const mongoClient = new MongoClient(uri);
+
+// interface document {
+//   content: string;
+// }
+
+// async function run() {
+//   try {
+//     const database = mongoClient.db("insertDB");
+//     // Specifying a Schema is optional, but it enables type hints on
+//     // finds and inserts
+//     const haiku = database.collection<document>("haiku");
+//     const result = await haiku.insertOne({
+//       content: "No bytes, no problem. Just insert a document, in MongoDB",
+//     });
+//     console.log(`A document was inserted with the _id: ${result.insertedId}`);
+//   } finally {
+//     await mongoClient.close();
+//   }
+// }
+// run().catch(console.dir);
+
 export default function Home() {
   return (
     <>
