@@ -1,8 +1,8 @@
+// index.tsx
 import Head from "next/head";
 import { Flex, Heading, Spacer, Text } from "@chakra-ui/react";
-import { NotiomLogo } from "../components/notiomLogo";
-import { CreateButton } from "@/components/CreateButton";
-import { MainCreateButton } from "@/components/MainCreateButton";
+import { NotiomLogo } from "../components/NotiomLogo"; // Ensure the path matches the actual component location
+import { MainCreateButton } from "@/components/MainCreateButton"; // Adjusted import
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex mt={29} ml={49} id="navBar">
+      <Flex mt={29} ml={49} id="navBar" align="center"> {/* Added align="center" to ensure vertical alignment */}
         <NotiomLogo />
         <Heading
           fontFamily={`"DM Sans", sans-serif`}
@@ -25,7 +25,6 @@ export default function Home() {
           Notiom
         </Heading>
         <Spacer />
-        <CreateButton />
       </Flex>
       <Flex
         direction="column"
@@ -43,7 +42,7 @@ export default function Home() {
         </Text>
       </Flex> 
       <Flex ml={49} mt={50}>
-        <MainCreateButton/>
+        <MainCreateButton />
       </Flex>
     </>
   );
