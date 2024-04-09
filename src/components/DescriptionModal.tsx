@@ -18,7 +18,7 @@ export const DescriptionModal: React.FC<DescriptionModalProps> = ({ isOpen, onCl
 
   const handleSave = () => {
     onSave(description);
-    setDescription(''); 
+    setDescription('');
     onClose(); 
   };
 
