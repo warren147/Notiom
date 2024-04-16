@@ -1,4 +1,3 @@
-// pages/api/createDoc.js
 import clientPromise from '../../lib/mongodb';
 
 export default async function handler(req, res) {
@@ -10,7 +9,6 @@ export default async function handler(req, res) {
         .collection('documents')
         .insertOne(req.body);
 
-      // If the insert was acknowledged and we have an ID, we can construct the document to return
       if (insertedId) {
         const newDoc = {
           _id: insertedId,
@@ -18,7 +16,6 @@ export default async function handler(req, res) {
         };
         res.status(200).json(newDoc);
       } else {
-        // Handle the case where insert was not successful
         res.status(500).json({ error: 'Document insertion not acknowledged' });
       }
     } catch (e) {

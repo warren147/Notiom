@@ -15,9 +15,9 @@ const Navbar = () => {
         mr="20px"
         left="10px"
         _hover={{
-          transform: 'scale(1.05)', // Adjust this value for the desired zoom level
+          transform: 'scale(1.05)', 
         }}
-        transition="transform 0.2s" // Adjust this value for the desired zoom speed
+        transition="transform 0.2s" 
       >
         Create
       </Button>

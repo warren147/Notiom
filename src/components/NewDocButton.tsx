@@ -23,20 +23,20 @@ interface NewDocProps {
 
 const NewDocButton: React.FC<NewDocProps> = ({ addDoc }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [title, setTitle] = useState('Untitled');
+  const [title, setTitle] = useState("");
   const [contents, setContents] = useState('');
   return (
     <>
       <button onClick={onOpen}>
         <Box
           _hover={{
-            transform: 'scale(1.05)', // Adjust this value for the desired zoom level
+            transform: 'scale(1.05)', 
           }}
-          transition="transform 0.2s" // Adjust this value for the desired zoom speed
+          transition="transform 0.2s" 
         >
           <Image
-            height="200px"
-            width="200px"
+            height="180px"
+            width="180px"
             src="/create-doc.svg"
             alt="SVG Tile"
           />
@@ -46,10 +46,12 @@ const NewDocButton: React.FC<NewDocProps> = ({ addDoc }) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+            Create New Document
+            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Document Title...'mt={3}/>
           </ModalHeader>
           <ModalBody>
             <Textarea
+              placeholder="Write your document here..."
               value={contents}
               onChange={(e) => setContents(e.target.value)}
             />
@@ -68,15 +70,6 @@ const NewDocButton: React.FC<NewDocProps> = ({ addDoc }) => {
             >
               Save
             </Button>
-            {/* <Button
-              variant="ghost"
-              onClick={() => {
-                setContents('');
-                onClose();
-              }}
-            >
-              Discard
-            </Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

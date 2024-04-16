@@ -1,4 +1,3 @@
-// components/Tile.js
 import { NotiomDoc } from '@/types';
 import {
   Box,
@@ -9,7 +8,6 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   useDisclosure,
   Button,
   Textarea,
@@ -30,13 +28,12 @@ const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
 
   const updateEntry = async () => {
     const updatedDoc = {
-      _id: doc._id, // Assuming you have the document's _id available as 'doc._id'
+      _id: doc._id, 
       title: title,
-      body: content, // Assuming the body of the document is represented by 'content' state
+      body: content, 
     };
 
     try {
-      // Make the PUT request to the updateDoc API endpoint
       const response = await fetch('/api/updateDoc', {
         method: 'PUT',
         headers: {
@@ -46,15 +43,11 @@ const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
       });
 
       if (!response.ok) {
-        // Handle any errors if the API request was not successful
         throw new Error('Failed to update the document');
       }
 
-      // Here you could update the state to reflect the change, if needed
-      // e.g., setAllDocs(prevDocs => prevDocs.map(doc => doc._id === updatedDoc._id ? updatedDoc : doc));
-      // This is just an example and will depend on how you're managing state in your application
+    
     } catch (error) {
-      // Handle the error state appropriately
       console.error('There was an error updating the document:', error);
     }
   };
@@ -63,8 +56,8 @@ const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
     <>
       <button onClick={onOpen}>
         <Box
-          width="200px"
-          height="200px"
+          width="180px"
+          height="180px"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -76,9 +69,9 @@ const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
           textAlign="center"
           padding="0px"
           _hover={{
-            transform: 'scale(1.05)', // Adjust this value for the desired zoom level
+            transform: 'scale(1.05)', 
           }}
-          transition="transform 0.2s" // Adjust this value for the desired zoom speed
+          transition="transform 0.2s"
         >
           <Text fontSize="30px" textStyle="body">
             {title ? title : 'UNTITLED'}
@@ -89,20 +82,20 @@ const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
+            Edit Document
             <Input
               value={titleDraft}
               onChange={(e) => setTitleDraft(e.target.value)}
+              placeholder="Document Title..."
+              mt={3}
             />
+            
           </ModalHeader>
-          <ModalCloseButton
-            onClick={() => {
-              setTitleDraft(title);
-            }}
-          />
           <ModalBody>
             <Textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
+              placeholder="Write your document here..."
             />
           </ModalBody>
 
