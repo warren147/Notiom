@@ -8,7 +8,7 @@ const Navbar = () => {
         <Image src="/notiom-logo.svg" boxSize="50px" alt="Notiom Logo" />
         <Text fontSize="40px">Notiom</Text>
       </HStack>
-
+{/* 
       <Button
         fontSize="20px"
         color="white"
@@ -20,7 +20,7 @@ const Navbar = () => {
         transition="transform 0.2s" 
       >
         Create
-      </Button>
+      </Button> */}
     </HStack>
   );
 };

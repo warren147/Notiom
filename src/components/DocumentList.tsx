@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import NewDocButton from './NewDocButton';
 import { NotiomDoc } from '@/types';
 import { create } from 'domain';
+import NewDocButtonTopRight from './NewDocButtonTopRight';
 
 interface DocumentListProps {
   documents: NotiomDoc[];
@@ -53,26 +54,25 @@ const DocumentList: React.FC<DocumentListProps> = ({ documents }) => {
   };
 
   return (
-    <Grid
-      mt="50px"
-      width="95%"
-      templateColumns="repeat(auto-fill, minmax(180px, 1fr))"
-      gap={10}
-    >
-      <NewDocButton addDoc={addDoc} />
-      {allDocs.map((doc, _) => {
-        return (
+    <>
+      <Grid
+        mt="50px"
+        width="95%"
+        templateColumns="repeat(auto-fill, minmax(180px, 1fr))"
+        gap={10}
+      >
+        <NewDocButton addDoc={addDoc} />
+        {allDocs.map((doc) => (
           <Tile
             doc={doc}
             key={doc._id.toString()}
-            deleteTile={() => {
-              deletetile(doc._id.toString());
-            }}
+            deleteTile={() => deletetile(doc._id.toString())}
           />
-        );
-      })}
-    </Grid>
+        ))}
+      </Grid>
+      <NewDocButtonTopRight addDoc={addDoc} />
+    </>
   );
-};
+}
 
 export default DocumentList;

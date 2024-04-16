@@ -1,4 +1,3 @@
-// components/Tile.js
 import {
   Box,
   Modal,

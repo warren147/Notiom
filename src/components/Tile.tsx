@@ -113,14 +113,13 @@ const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
             </Button>
             <Button
               colorScheme='red'
-              variant="ghost"
               onClick={() => {
                 setTitleDraft(title);
                 deleteTile();
                 onClose();
               }}
             >
-              Discard Doc
+              Delete
             </Button>
           </ModalFooter>
         </ModalContent>
