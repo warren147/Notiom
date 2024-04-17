@@ -27,6 +27,7 @@ import {
     return (
       <>
         <Button onClick={onOpen}
+            colorScheme='blue'
             fontSize="20px"
             width={100}
             color="white"
