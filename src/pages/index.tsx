@@ -1,4 +1,4 @@
-// pages/index.tsx
+
 import { VStack } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
 import MainTitle from '../components/MainTitle';
@@ -36,3 +36,4 @@ export async function getServerSideProps(context: any) {
     props: { documents }, 
   };
 }
+
