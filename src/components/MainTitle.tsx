@@ -1,12 +1,24 @@
 import React from 'react'
-import { Text, VStack } from '@chakra-ui/react'
+import { Text, Flex, Heading} from '@chakra-ui/react'
 
 const MainTitle = () => {
   return (
-    <VStack mt="60px" alignItems="center">
-        <Text textStyle="h1" fontSize={50}>Create. Explore</Text>
-        <Text textStyle="h2" fontSize={30}>{"The document editing software you've been waiting for"}</Text>
-    </VStack>
+    <Flex
+    direction="column"
+    align="center"
+    justify="center"
+    textAlign="center"
+    p={{ base: 4, md: 8 }}
+    mt={"35px"}
+    
+  >
+    <Heading mb={30} fontSize={"60px"}>
+      Create. Explore.
+    </Heading>
+    <Text fontSize={"40px"} color="#545454">
+      The document editing software you've been waiting for
+    </Text>
+  </Flex> 
     
   )
 }

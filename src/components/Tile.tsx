@@ -26,6 +26,11 @@ const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
   const [titleDraft, setTitleDraft] = useState(doc.title);
   const [content, setContent] = useState(doc.body);
 
+  const condenseTitle = (title: string): string => {
+    const words = title.split(' ');
+    return words.length > 5 ? words.slice(0, 5).join(' ') + '...' : title;
+  };
+
   const updateEntry = async () => {
     const updatedDoc = {
       _id: doc._id, 
@@ -64,17 +69,22 @@ const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
           borderWidth="2px"
           borderColor="#A3A3A3"
           backgroundColor="#F8F8F8"
-          borderRadius="lg"
+          borderRadius="10px"
           overflow="auto"
           textAlign="center"
           padding="0px"
+        
+    
+          whiteSpace="normal"
+          textOverflow="ellipsis"
+          color="black"
           _hover={{
             transform: 'scale(1.05)', 
           }}
           transition="transform 0.2s"
         >
-          <Text fontSize="30px" textStyle="body">
-            {title ? title : 'UNTITLED'}
+          <Text fontSize="30px" textStyle="body" fontFamily="'DM Sans', sans-serif" fontWeight='bold'>
+            {title ? condenseTitle(title) : 'UNTITLED'}
           </Text>
         </Box>
       </button>

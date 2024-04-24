@@ -25,21 +25,25 @@ import {
     const [title, setTitle] = useState("");
     const [contents, setContents] = useState('');
     return (
-      <>
-        <Button onClick={onOpen}
-            colorScheme='blue'
-            fontSize="20px"
-            width={100}
-            color="white"
-            mr="-1500px"
-            mt="-500px"
-            _hover={{
-                transform: 'scale(1.05)', 
-            }}
-            transition="transform 0.2s"
-        >
-            Create
-        </Button>
+      <Box
+      position="fixed"
+      top="20px"
+      right="20px"
+      zIndex="tooltip" 
+    >
+      <Button onClick={onOpen}
+        bg="#2F80ED"
+        color="white"
+        _hover={{ bg: "blue.600" }}
+        _active={{ bg: "blue.700" }}
+        borderRadius="10px"
+        width="129px"
+        height="48px"
+        fontFamily="'DM Sans', sans-serif"
+        fontSize="24px"
+      >
+          Create
+      </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -71,7 +75,7 @@ import {
             </ModalFooter>
           </ModalContent>
         </Modal>
-      </>
+      </Box>
     );
   };
   
