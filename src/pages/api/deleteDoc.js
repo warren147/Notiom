@@ -8,9 +8,16 @@ export default async function handler(req, res) {
       const client = await clientPromise;
       const db = client.db('notiom');
 
-      const response = await db
-        .collection('documents')
-        .deleteOne({ _id: new ObjectId(docId) });
+      const collection = db.collection('documents');
+      let response;
+
+      if (ObjectId.isValid(docId)) {
+        response = await collection.deleteOne({ _id: new ObjectId(docId) });
+      }
+
+      if (!response || response.deletedCount === 0) {
+        response = await collection.deleteOne({ _id: docId });
+      }
 
       if (response.deletedCount === 1) {
         res.status(200).json({ message: 'Document successfully deleted.' });

@@ -1,19 +1,13 @@
 import { NotiomDoc } from '@/types';
 import {
   Box,
-  Modal,
   Text,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  useDisclosure,
-  Button,
-  Textarea,
-  Input,
+  useColorModeValue,
+  IconButton,
+  VStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { DeleteIcon } from '@chakra-ui/icons';
+import { useRouter } from 'next/router';
 
 interface TileProps {
   doc: NotiomDoc;
@@ -21,120 +15,73 @@ interface TileProps {
 }
 
 const Tile: React.FC<TileProps> = ({ doc, deleteTile }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [title, setTitle] = useState(doc.title);
-  const [titleDraft, setTitleDraft] = useState(doc.title);
-  const [content, setContent] = useState(doc.body);
+  const router = useRouter();
+  const tileBg = useColorModeValue('#F8F8F8', '#1A202C');
+  const tileBorder = useColorModeValue('#A3A3A3', '#4A5568');
+  const tileText = useColorModeValue('#1A202C', 'gray.100');
+  const metaText = useColorModeValue('gray.600', 'gray.400');
 
-  const condenseTitle = (title: string): string => {
-    const words = title.split(' ');
-    return words.length > 5 ? words.slice(0, 5).join(' ') + '...' : title;
+  const navigateToDoc = () => {
+    router.push(`/doc/${doc._id}`);
   };
 
-  const updateEntry = async () => {
-    const updatedDoc = {
-      _id: doc._id, 
-      title: title,
-      body: content, 
-    };
+  const plainTextBody = doc.body ? doc.body.replace(/<[^>]+>/g, '') : '';
 
-    try {
-      const response = await fetch('/api/updateDoc', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedDoc),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to update the document');
-      }
-
-    
-    } catch (error) {
-      console.error('There was an error updating the document:', error);
-    }
-  };
+  const updatedLabel = doc.updatedAt
+    ? new Date(doc.updatedAt).toLocaleString()
+    : null;
 
   return (
-    <>
-      <button onClick={onOpen}>
-        <Box
-          width="180px"
-          height="180px"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          borderWidth="2px"
-          borderColor="#A3A3A3"
-          backgroundColor="#F8F8F8"
-          borderRadius="10px"
-          overflow="auto"
-          textAlign="center"
-          padding="0px"
-        
-    
-          whiteSpace="normal"
-          textOverflow="ellipsis"
-          color="black"
-          _hover={{
-            transform: 'scale(1.05)', 
-          }}
-          transition="transform 0.2s"
+    <Box
+      role="button"
+      onClick={navigateToDoc}
+      width="100%"
+      height="180px"
+      borderWidth="2px"
+      borderColor={tileBorder}
+      backgroundColor={tileBg}
+      borderRadius="10px"
+      padding={4}
+      transition="background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease"
+      _hover={{ transform: 'scale(1.03)' }}
+      position="relative"
+      overflow="hidden"
+    >
+      <IconButton
+        aria-label="Delete document"
+        icon={<DeleteIcon />}
+        size="sm"
+        position="absolute"
+        top={2}
+        right={2}
+        variant="ghost"
+        color={metaText}
+        _hover={{ color: 'red.500', background: 'transparent' }}
+        onClick={(event) => {
+          event.stopPropagation();
+          deleteTile();
+        }}
+      />
+      <VStack align="flex-start" spacing={2} height="100%">
+        <Text
+          fontSize="xl"
+          fontWeight="bold"
+          color={tileText}
+          noOfLines={2}
+          maxWidth="80%"
         >
-          <Text fontSize="30px" textStyle="body" fontFamily="'DM Sans', sans-serif" fontWeight='bold'>
-            {title ? condenseTitle(title) : 'UNTITLED'}
+          {doc.title ? doc.title : 'UNTITLED'}
+        </Text>
+        <Text fontSize="sm" color={metaText} noOfLines={3} flexGrow={1}>
+          {plainTextBody || 'Start writing your document...'}
+        </Text>
+        {updatedLabel && (
+          <Text fontSize="xs" color={metaText} mt="auto">
+            Updated {updatedLabel}
           </Text>
-        </Box>
-      </button>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            Edit Document
-            <Input
-              value={titleDraft}
-              onChange={(e) => setTitleDraft(e.target.value)}
-              placeholder="Document Title..."
-              mt={3}
-            />
-            
-          </ModalHeader>
-          <ModalBody>
-            <Textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Write your document here..."
-            />
-          </ModalBody>
-
-          <ModalFooter>
-            <Button
-              colorScheme="blue"
-              mr={3}
-              onClick={() => {
-                updateEntry();
-                setTitle(titleDraft);
-                onClose();
-              }}
-            >
-              Save
-            </Button>
-            <Button
-              colorScheme='red'
-              onClick={() => {
-                setTitleDraft(title);
-                deleteTile();
-                onClose();
-              }}
-            >
-              Delete
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+        )}
+      </VStack>
+    </Box>
   );
 };
 

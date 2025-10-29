@@ -1,20 +1,19 @@
-
-import { Flex, Grid, Image } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import Tile from './Tile';
-import React, { useState } from 'react';
+import React from 'react';
 import NewDocButton from './NewDocButton';
 import { NotiomDoc } from '@/types';
-import { create } from 'domain';
 import NewDocButtonTopRight from './NewDocButtonTopRight';
 
 interface DocumentListProps {
   documents: NotiomDoc[];
+  setDocuments: React.Dispatch<React.SetStateAction<NotiomDoc[]>>;
 }
 
-const DocumentList: React.FC<DocumentListProps> = ({ documents }) => {
-  const [allDocs, setAllDocs] = useState<NotiomDoc[]>(documents);
+const DocumentList: React.FC<DocumentListProps> = ({ documents, setDocuments }) => {
+  const allDocs = Array.isArray(documents) ? documents : [];
 
-  const addDoc = async (newDoc: { title: string; body: string }) => {
+  const addDoc = async (newDoc: { title: string; body: string }): Promise<NotiomDoc | null> => {
     try {
       const docToCreate = {
         title: newDoc.title,
@@ -29,10 +28,20 @@ const DocumentList: React.FC<DocumentListProps> = ({ documents }) => {
         body: JSON.stringify(docToCreate),
       });
 
-      let createdDoc = await response.json();
-      setAllDocs((prevDocs) => [...prevDocs, createdDoc]);
+      if (!response.ok) {
+        throw new Error('Failed to create the document');
+      }
+
+      const createdDoc = await response.json();
+      const created = createdDoc as NotiomDoc;
+      setDocuments((prevDocs) => [
+        created,
+        ...(Array.isArray(prevDocs) ? prevDocs : []),
+      ]);
+      return created;
     } catch (error) {
       console.error('Failed to create the document:', error);
+      return null;
     }
   };
 
@@ -43,8 +52,9 @@ const DocumentList: React.FC<DocumentListProps> = ({ documents }) => {
       });
 
       if (response.ok) {
-        const newDocs = allDocs.filter((doc) => doc._id.toString() !== docId);
-        setAllDocs(newDocs);
+        setDocuments((prevDocs) =>
+          (Array.isArray(prevDocs) ? prevDocs : []).filter((doc) => doc._id !== docId),
+        );
       } else {
         console.error('Failed to delete the document');
       }
@@ -62,11 +72,11 @@ const DocumentList: React.FC<DocumentListProps> = ({ documents }) => {
         gap={10}
       >
         <NewDocButton addDoc={addDoc} />
-        {allDocs.map((doc) => (
+        {Array.isArray(allDocs) && allDocs.map((doc) => (
           <Tile
             doc={doc}
-            key={doc._id.toString()}
-            deleteTile={() => deletetile(doc._id.toString())}
+            key={doc._id}
+            deleteTile={() => deletetile(doc._id)}
           />
         ))}
       </Grid>

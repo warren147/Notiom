@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, Flex, Heading} from '@chakra-ui/react'
+import { Text, Flex, Heading, useColorModeValue } from '@chakra-ui/react'
 
 const MainTitle = () => {
+  const subtitleColor = useColorModeValue('#545454', 'gray.300');
   return (
     <Flex
     direction="column"
@@ -12,14 +13,14 @@ const MainTitle = () => {
     mt={"35px"}
     
   >
-    <Heading mb={30} fontSize={"60px"}>
+    <Heading mb={30} fontSize={"60px"} transition="color 0.3s ease">
       Create. Explore.
     </Heading>
-    <Text fontSize={"40px"} color="#545454">
-      The document editing software you've been waiting for
+    <Text fontSize={"40px"} color={subtitleColor} transition="color 0.3s ease">
+      The document editing software you&apos;ve been waiting for
     </Text>
   </Flex> 
-    
+
   )
 }
 
